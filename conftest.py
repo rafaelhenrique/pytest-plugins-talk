@@ -9,12 +9,6 @@ MEASURES = {}
 
 
 def pytest_runtest_call(item):
-    # Beautiful names
-    #
-    # test_filename = item.module.__file__
-    # test_name = item.name
-    # test_fullname = f"{test_filename}::{test_name}"
-
     # elapsed time
     start = time()
     runner.pytest_runtest_call_orig(item)
@@ -41,11 +35,8 @@ def pytest_runtest_call(item):
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
-    # markup = {"green": True, "bold": True}
-    bold = {"bold": True}
     writer = terminalreporter
     writer.section("test measures")
     for item, values in MEASURES.items():
-        writer.line("\n" + item, **bold)
-        for measure, value in values.items():
-            writer.line(f"{measure}: {value}")
+        writer.line("\n" + item)
+        writer.line(f"{values}")
