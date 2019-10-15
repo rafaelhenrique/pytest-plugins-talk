@@ -9,7 +9,7 @@ MEASURES = {}
 
 
 def pytest_runtest_call(item):
-    # Beautiful names
+    # Beautiful names of tests :)
     #
     # test_filename = item.module.__file__
     # test_name = item.name
