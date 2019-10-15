@@ -2,12 +2,12 @@ from time import sleep
 
 
 def slow_function():
-    sleep(1)
+    sleep(0.4)
     return 'done'
 
 
 def fast_function():
-    sleep(1)
+    sleep(0.1)
     return 'done'
 
 
