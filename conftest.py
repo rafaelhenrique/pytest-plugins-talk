@@ -66,9 +66,9 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
             ])
 
             if red_conditions:
-                writer.line(f"{measure}: {value}", **red)
+                writer.line(f"{measure:12s}\t{value}", **red)
             else:
-                writer.line(f"{measure}: {value}", **green)
+                writer.line(f"{measure:12s}\t{value}", **green)
 
 
 def pytest_addoption(parser):
