@@ -2,7 +2,6 @@ import ast
 import inspect
 from time import time
 from _pytest import runner
-runner.pytest_runtest_call_orig = runner.pytest_runtest_call
 
 
 MEASURES = {}
@@ -11,7 +10,7 @@ MEASURES = {}
 def pytest_runtest_call(item):
     # elapsed time
     start = time()
-    runner.pytest_runtest_call_orig(item)
+    runner.pytest_runtest_call(item)
     elapsed_time = time() - start
 
     # lines of code
