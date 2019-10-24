@@ -40,11 +40,23 @@ def pytest_runtest_call(item):
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
-    # markup = {"green": True, "bold": True}
+    green = {"green": True, "bold": True}
+    red = {"red": True, "bold": True}
     bold = {"bold": True}
     writer = terminalreporter
     writer.section("test measures")
     for item, values in MEASURES.items():
         writer.line("\n" + item, **bold)
         for measure, value in values.items():
-            writer.line(f"{measure}: {value}")
+            red_conditions = any([
+                measure == 'LOC' and value > 10,
+                measure == 'ifs_used' and value >= 1,
+                measure == 'for_used' and value >= 1,
+                measure == 'while_used' and value >= 1,
+                measure == 'elapsed_time' and value >= 5,
+            ])
+
+            if red_conditions:
+                writer.line(f"{measure}: {value}", **red)
+            else:
+                writer.line(f"{measure}: {value}", **green)
